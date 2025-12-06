@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+  <div class="alert mt-5  {{ message.tags }}" role="alert">
+    <strong>Hey !</strong> {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+<form method="post" class="my-5">
+    <h1 class="my-5 text-center">Log <span>in</span></h1>
+    {% csrf_token %} 
+    <input type="email" name="email" class="form-control formbox" placeholder="Enter Your Email" >
+    <input type="password" name="password" class="form-control formbox  my-3" placeholder="Enter Your Password" >
+    <h6>if you dont have a account <a href="/singup" class="text-white">Sing Up</a></h6>
+    <input type="submit" class="aa my-4 text-white">
+</form>
+{% endblock content %}

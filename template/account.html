@@ -1,0 +1,86 @@
+{% extends 'main.html' %}
+{% block content %}
+{% load customfilter %}
+<div class="main">
+    <div class="container">
+        <div class="row align-items-center">
+            {% if request.session.customer %}
+            <div class="col-lg-6">
+                <div class="accountinfo">
+                <div class="image">
+                    <img src="/static/img/p.png" alt="...img">
+                    <hr>
+                    <h1 class="my-5">
+                        {% if d %}
+                        {{d}}
+                        {% else %}
+                        New User Please Singup
+                        {% endif %}
+                    </h1>
+                </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="accounthistory">
+                 <div class="col-lg-12">
+                    
+<table class="table text-white my-5">
+    <thead>
+      {% if s %}
+      <tr>
+        <th scope="col">Product <span>image</span></th>
+        <th scope="col">Product quan<span>tity</span></th>
+        <th scope="col">Product P<span>rice</span></th>
+      </tr>
+    </thead>
+    <tbody>
+
+  {% for i in s %}
+  <tr>
+    <td><img style="width: 35px;" src="/media/{{i.product_image}}" alt="..img"></td>
+    <td>{{i|is_in_cart:request.session.cart}}</td>
+    <td>{{i|cart_quantity:request.session.cart}}</td>
+  </tr>
+  {% endfor %}
+  <tr>
+    <th>Toatal</th>
+    <th>-</th>
+     <td>{{s|toatal_quantity:request.session.cart}}</td>
+   </tr>
+   {% else %}
+   <h1 class="text-center my-5">Cart is e<span>mpty</span></h1>
+  {% endif %}
+                 <div class="col-lg-12">
+                    <table class="table text-white my-5">
+                        <thead>
+                          <tr>
+                            <th scope="col">Pro<span>duct</span></th>
+                            <th scope="col">quan<span>tity</span></th>
+                            <th scope="col">totalp<span>rice</span></th>
+                            <th scope="col">st<span>atus</span></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                      <tr>
+                        {% for i in o %}
+                        <td>| {{i.product}}</td>
+                        <td>{{i.quantity}}</td>
+                        <td>{{i.totalprice}}</td>
+                        {% if i.status %}
+                        <td class='text-info'>Placed</td>
+                        {% else %}
+                        <td class='text-danger'>Pending</td>
+                        {% endif %}
+                        {% endfor %}
+                        </tbody>
+                      </table>                    
+                 </div>
+                </div>
+            </div>
+            {% else %}
+            <a href="/singup">Please Si<span>ngup</span></a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

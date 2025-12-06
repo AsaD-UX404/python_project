@@ -1,0 +1,118 @@
+{% extends 'main.html' %}
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+  <div class="alert mt-5  {{ message.tags }}" role="alert">
+    <strong>
+      {% if request.session.customer  %}
+      {{request.session.customer}} {% else %}User !{% endif %}</strong> {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+{% load customfilter %}
+<table class="table text-white my-5">
+    <thead>
+      {% if s %}
+      <tr>
+        <th scope="col">Product <span>image</span></th>
+        <th scope="col">Product <span>Name</span></th>
+        <th scope="col">Product quan<span>tity</span></th>
+        <th scope="col">Product P<span>rice</span></th>
+        <th scope="col">re<span>move</span></th>
+      </tr>
+    </thead>
+    <tbody>
+
+  {% for i in s %}
+  <tr>
+    <td><img style="width: 35px;" src="/media/{{i.product_image}}" alt="..img"></td>
+    <td>{{i.product_name}}</td>
+    <td>{{i|is_in_cart:request.session.cart}}</td>
+    <td>
+      <form action="{% url 'cart' i.id %}">
+        <input class='btn btn-primary' type="submit" value="+">
+      </form>
+      {{i|cart_quantity:request.session.cart}}
+      <form action="{% url 'cart' i.id %}">
+        <input class='btn btn-primary' type="submit" name="remove" value="-">
+      </form>
+    </td>
+    <td>
+      <button type="button" class="btn btn-danger" href="#myModal" data-bs-toggle="modal" data-bs-target="#myModal">
+        <i class="fa-solid fa-trash"></i>
+      </button>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content bg-dark">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Confirm you want to remove</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="{% url 'cart' i.id %}" method="post">
+                {% csrf_token %}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-danger" value="Deleate">
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+  {% endfor %}
+  <tr>
+    <th>Toatal</th>
+    <th>-</th>
+     <td>{{s|toatal_quantity:request.session.cart}}</td>
+   </tr>
+   {% else %}
+   <h1 class="text-center my-5">Cart is e<span>mpty</span></h1>
+  {% endif %}
+    </tbody>
+  </table>
+  <div class="btn">
+    <!-- Button trigger modal -->
+    <button type="button" href="#myModal2" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal2">
+     Place Order
+   </button>
+   <!-- Modal -->
+   <div class="modal fade" id="myModal2"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+       <div class="modal-content bg-dark">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">Place Order</h5>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         {% if request.session.cart|len %}
+         <div class="modal-body">
+          {% if request.session.customer %}
+          <form method="post">
+            {% csrf_token %}
+            <input type="text" class="formbox mb-3" name="add" placeholder="enter your address"><br>
+            <input type="number" class="formbox" name="phone" placeholder="enter your number">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger  " data-bs-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-success" value="Confirm Order">
+            </div>
+          </div>
+          {% else %}
+          <h6>You dont have account please  <a href="/login" class="bttn">LOg in</a></h6>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger  " data-bs-dismiss="modal">Close</button>
+          </div>
+         {% endif %}
+        </form>
+        {% else %}
+        <h6>You Dont Have any products in cart</h6>
+          {% endif %}
+       </div>
+     </div>
+   </div>
+  </div>
+
+{% endblock content %}

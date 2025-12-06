@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+  <div class="alert mt-5  {{ message.tags }}" role="alert">
+    <strong>
+      {% if request.session.customer  %}
+      {{request.session.customer}} {% else %}User !{% endif %}</strong> {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+<form method="post" class="my-5">
+    {% csrf_token %} 
+    <h1 class="text-center my-4">Sing <span>Up</span></h1>
+    <input type="text" name="name" class="form-control formbox" placeholder="Enter Your Name" >
+    <input type="email" name="email" class="form-control formbox my-3" placeholder="Enter Your Email" >
+    <input type="password" name="password" class="form-control  formbox mb-4" placeholder="Enter Your Password" >
+    <h6>if you have a account <a href="/login" class="text-white">LOg in</a></h6>
+    <input type="submit" class="aa text-white">
+</form>
+{% endblock content %}

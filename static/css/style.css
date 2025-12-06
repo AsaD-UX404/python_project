@@ -1,0 +1,101 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none;
+}
+body{
+    background-color: black !important;
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+}
+.bttn{
+	border: 1px solid white;
+	padding: 10px 60px;
+	font-size: 15px;
+	color: white;
+	margin: 20px 0px;
+	text-decoration: none;
+}
+input:focus{
+    background-color: black !important;
+    color: white !important;
+}
+.formbox{
+    background: rgba(255, 255, 255, 0)  !important;
+border-radius: 5px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1)  !important;
+backdrop-filter: blur(5px)  !important;
+-webkit-backdrop-filter: blur(5px )  !important;
+border: 1px solid rgba(255, 255, 255, 0.3)  !important;
+color: white !important;
+padding: 10px;
+}
+
+.box{
+    height: 500px;
+background: rgba(255, 255, 255, 0);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.aa{
+    color: white !important;
+           height: 40px;
+           width: 140px;
+           background: rgba(255, 255, 255, 0);
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px) !important;
+border: 1px solid rgba(255, 255, 255, 0.3) !important;
+       }
+.box{
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 610px;
+    width: 100%;
+    position: relative;
+    margin: auto !important;
+    color: white;
+}
+.box h1{
+    position:absolute;
+    bottom: 10px;
+    left: 10px;
+}
+.text_wrapper h1{
+    font-size: 85px;
+}
+.personalframe{
+    background-color: #78cd1b;
+    border-radius: 30px;
+}
+span{
+    color: #78cd1b;
+}
+
+@media screen and (max-width:590px){
+    .text_wrapper_left{
+        margin-top: 50px;
+        text-align: center;
+    }
+    .image_wrapper{
+        margin-top: 30px;
+    }
+}
+i{
+    color: #78cd1b;
+    font-size: 40px;
+    margin: 20px 30px;
+}
+td i{
+    color: #78cd1b;
+    font-size: 16px !important;
+}
+.navbar-nav .nav-link.active, .navbar-nav .show>.nav-link{
+    color: #78cd1b !important;
+}

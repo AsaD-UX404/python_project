@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="prod_detail my-5">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-6">
+				<img src="/media/{{d.product_image}}" class="image-fluid" width="100%">
+			</div>
+			<div class="col-lg-6">
+				<h1>{{d.product_name}}</h1>
+				<h5 class="my-4">PRICE</h5>
+				<div class="price d-flex mb-3">
+						<s class="me-4">₹{{d.product_cutPrice}}</s>
+						<h5 class="text-danger">₹{{d.product_finalprice}}</h5>
+					</div>
+				<p class="my-4">{{d.product_desc}}.</p>
+     <form action="/">
+        <a href="{% url 'cart' d.id %}" class="bttn">add to cart</a>
+	 </form>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}
